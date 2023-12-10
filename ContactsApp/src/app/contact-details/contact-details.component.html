@@ -1,0 +1,60 @@
+<h4>{{!!contactId ? contact.firstName + ' ' + contact.lastName : 'New contact'}}</h4>
+
+<div class="row">
+    <div class="col-xs-12 col-lg-12">
+        <form [formGroup]="contactDetailsForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 form-group">
+                    <label for="contact-firstname">First name</label>
+                    <input id="contact-firstname" type="text" class="form-control" formControlName="contactFirstName">
+                </div>
+                <div class="col-sm-12 col-md-4 form-group">
+                    <label for="contact-lastname">Last name</label>
+                    <input id="contact-lastname" type="text" class="form-control" formControlName="contactLastName">
+                </div>                
+                <div class="col-sm-12 col-md-4 form-group">
+                    <label for="contact-category">Category</label>
+                    <select id="contact-category" formControlName="contactCategory">
+                        <option *ngFor="let category of contactCategories" [ngValue]="category.contactCategoryId">{{category.contactCategoryText}}</option>
+                    </select>
+                    <input *ngIf="isCategoryCustomTextInputVisible()" id="category-customtext" type="text" class="form-control" formControlName="categoryCustomText">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-4 form-group">
+                    <label for="contact-email">Email</label>
+                    <input id="contact-email" type="text" class="form-control" formControlName="contactEmail">
+                </div>
+                <div class="col-sm-12 col-md-4 form-group">
+                    <label for="contact-phonenumber">Phone number</label>
+                    <input id="contact-phonenumber" type="text" class="form-control" formControlName="contactPhoneNumber">
+                </div>
+                    <div class="col-sm-12 col-md-4 form-group">
+                    <label for="contact-birthdate">Birth date</label>
+                    <input id="contact-birthdate" type="date" class="form-control" formControlName="contactBirthdate">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-4 form-group">
+                    <label for="contact-password">Password</label>
+                    <input id="contact-password" type="password" class="form-control" formControlName="contactPassword">
+                </div>                
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xs-12 col-lg-12">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-4 form-group">
+                        </div>
+                        <div class="col-sm-12 col-md-4 form-group">
+                            <button *ngIf="isSaveActionAllowed()" class="btn btn-success" type="submit">Save</button>
+                            <button class="btn btn-primary" type="button" (click)="onClose(false)">Close</button>
+                        </div>
+                        <div class="col-sm-12 col-md-4 form-group">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

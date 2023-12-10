@@ -1,0 +1,34 @@
+<div *ngIf="isContactDetailsFormVisible" >
+  <contact-details [contactId]="selectedContactId" (closingEvent)="closeContactDetails($event)"></contact-details>
+</div>
+
+<button *ngIf="isLogged() && !isContactDetailsFormVisible" type="button" class="btn1" (click)="openContactDetails()">Create new contact</button>
+
+<p *ngIf="isLogged()">zalogowany</p>
+<p *ngIf="!isLogged()">niezalogowany</p>
+
+<div>
+    <div class="alert alert-success" style="text-align: center;"><b>Contact List</b></div>
+    <div class="table-responsive" style="text-align: center;">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First name</th>
+          <th scope="col">Last name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let contact of ContactList | async; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{contact.firstName}}</td>
+          <td>{{contact.lastName}}</td>
+          <td >
+            <button type="button" class="btn1" (click)='selectContact(contact.contactInfoId);'>Show</button>
+            <button *ngIf="isLogged()" type="button" class="btn1" (click)="removeContact(contact.contactInfoId);">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+      </table>
+    </div>
+  </div>
